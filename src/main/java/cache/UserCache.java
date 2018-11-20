@@ -8,7 +8,7 @@ import model.Product;
 import model.User;
 import utils.Config;
 
-// TODO: Build this cache and use it.
+// TODO: Build this cache and use it. - FIXED
 public class UserCache {
 
     // List of products
@@ -30,7 +30,7 @@ public class UserCache {
         // Otherwise we look at the age of the cache and figure out if we should update.
         // If the list is empty we also check for new products
         if (forceUpdate
-                || ((this.created + this.ttl) >= (System.currentTimeMillis() / 1000L))
+                || ((this.created + this.ttl) <= (System.currentTimeMillis() / 1000L))
                 || this.users.isEmpty()) {
 
             // Get products from controller, since we wish to update.

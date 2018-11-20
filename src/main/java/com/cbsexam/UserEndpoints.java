@@ -96,7 +96,7 @@ public class UserEndpoints {
     }
   }
 
-  // TODO: Make the system able to login users and assign them a token to use throughout the system.
+  // TODO: Make the system able to login users and assign them a token to use throughout the system. - FIXED
   @POST
   @Path("/login")
   @Consumes(MediaType.APPLICATION_JSON)
@@ -116,6 +116,7 @@ public class UserEndpoints {
       return Response.status(400).entity("Could not create user").build();
     }
 
+    // Return a response with status 200 and JSON as type
   }
 
   // TODO: Make the system able to delete users

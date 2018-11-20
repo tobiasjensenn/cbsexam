@@ -115,7 +115,7 @@ public final class Config {
     ORDER_TTL = json.get("ORDER_TTL").getAsLong();
     USER_TTL = json.get("USER_TTL").getAsLong();
     SALT = json.get("SALT").getAsString();
-    ENCRYPTION_KEY = json.get("ENCRYPTOON_KEY").getAsString();
+    ENCRYPTION_KEY = json.get("ENCRYPTION_KEY").getAsString();
   }
 
 }
