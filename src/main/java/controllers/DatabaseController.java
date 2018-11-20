@@ -109,5 +109,37 @@ public class DatabaseController {
 
     // Return the resultset which at this point will be null
     return result;
+
   }
+
+  public void loginUser(String sql) {
+
+    if (connection == null)
+      connection = getConnection();
+
+    try {
+      PreparedStatement statement = connection.prepareStatement(sql);
+      statement.executeUpdate();
+
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+  }
+
+  public boolean updateUser(String sql) {
+
+    if (connection == null)
+      connection = getConnection();
+
+    try {
+      PreparedStatement statement = connection.prepareStatement(sql);
+      statement.executeUpdate();
+      return true;
+
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+    return false;
+  }
+
 }

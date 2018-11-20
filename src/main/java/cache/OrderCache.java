@@ -8,6 +8,8 @@ import model.Order;
 import model.Product;
 import utils.Config;
 
+// TODO: Build this cache and use it.
+
 public class OrderCache {
 
     // List of products

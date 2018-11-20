@@ -1,5 +1,6 @@
 package com.cbsexam;
 
+import cache.UserCache;
 import com.google.gson.Gson;
 import controllers.UserController;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import model.Product;
 import model.User;
 import utils.Encryption;
 import utils.Log;
@@ -45,7 +48,11 @@ public class UserEndpoints {
     }
   }
 
-  /** @return Responses */
+  public static UserCache userCache = new UserCache();
+
+  /**
+   * @return Responses
+   */
   @GET
   @Path("/")
   public Response getUsers() {
@@ -54,7 +61,8 @@ public class UserEndpoints {
     Log.writeLog(this.getClass().getName(), this, "Get all users", 0);
 
     // Get a list of users
-    ArrayList<User> users = UserController.getUsers();
+    ArrayList<User> users = userCache.getUsers(false);
+
 
     // TODO: Add Encryption to JSON - FIXED
     // Transfer users to json in order to return it to the user
@@ -92,18 +100,35 @@ public class UserEndpoints {
   @POST
   @Path("/login")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response loginUser(String x) {
+  public Response loginUser(String body) {
 
-    // Return a response with status 200 and JSON as type
-    return Response.status(400).entity("Endpoint not implemented yet").build();
+    // Read the json from body and transfer it to a user class
+    User user = new Gson().fromJson(body, User.class);
+
+    // Get the user back with the added ID and return it to the user
+    String token = UserController.loginUser(user);
+
+    /// Return the data to the user
+    if (token != "") {
+      // Return a response with status 200 and JSON as type
+      return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(token).build();
+    } else {
+      return Response.status(400).entity("Could not create user").build();
+    }
+
   }
 
   // TODO: Make the system able to delete users
-  public Response deleteUser(String x) {
+  public Response deleteUser(String token) {
 
     // Return a response with status 200 and JSON as type
     return Response.status(400).entity("Endpoint not implemented yet").build();
   }
+
+
+
+
+
 
   // TODO: Make the system able to update users
   public Response updateUser(String x) {
