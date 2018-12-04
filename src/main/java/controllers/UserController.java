@@ -204,7 +204,7 @@ public class UserController {
 
       try {
           DecodedJWT jwt = JWT.decode(token);
-          int id = jwt.getClaim("userId").asInt();
+          int id = jwt.getClaim("userid").asInt();
 
           try {
               PreparedStatement deleteUser = dbCon.getConnection().prepareStatement("DELETE FROM user WHERE id = ?");
@@ -234,7 +234,7 @@ public class UserController {
 
     try {
       DecodedJWT jwt = JWT.decode(token);
-      int id = jwt.getClaim("userId").asInt();
+      int id = jwt.getClaim("userid").asInt();
 
       try {
         PreparedStatement updateUser = dbCon.getConnection().prepareStatement("UPDATE user SET " + "first_name = ?, last_name = ?, " +

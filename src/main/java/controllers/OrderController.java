@@ -137,7 +137,7 @@ public class OrderController {
 
     // TODO: Enable transactions in order for us to not save the order if somethings fails for some of the other inserts. - FIXED
 
-    Connection connection = null;
+    Connection connection = DatabaseController.getConnection();
 
     // Insert the product in the DB
     //Insert try catch method
@@ -165,9 +165,12 @@ public class OrderController {
         //Update the productid of the product before returning
         order.setId(orderID);
       }
+      //if (true) {
+        //throw new SQLException();
+      //}
 
       // Create an empty list in order to go trough items and then save them back with ID
-      ArrayList<LineItem> items = new ArrayList<LineItem>();
+        ArrayList<LineItem> items = new ArrayList<LineItem>();
 
       // Save line items to database
       for (LineItem item : order.getLineItems()) {
