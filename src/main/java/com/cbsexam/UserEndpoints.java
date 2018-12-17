@@ -115,7 +115,7 @@ public class UserEndpoints {
     // Return a response with status 200 and JSON as type
   }
 
-  // TODO: Make the system able to delete users (FIX??)
+  // TODO: Make the system able to delete users FIXED
   @DELETE
   @Path("{userId}/{token}")
   @Consumes(MediaType.APPLICATION_JSON)
@@ -131,7 +131,7 @@ public class UserEndpoints {
     }
   }
 
-  // TODO: Make the system able to update users (FIX??)
+  // TODO: Make the system able to update users FIXED
   @PUT
   @Path("/{idUser}/{token}")
   @Consumes(MediaType.APPLICATION_JSON)
